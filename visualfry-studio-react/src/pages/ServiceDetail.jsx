@@ -111,12 +111,6 @@ const ServiceDetail = () => {
           </div>
         )}
 
-        <div style={{ textAlign: 'center', marginTop: '60px', marginBottom: '80px' }}>
-          <Link to="/#contact" className="btn-primary" style={{ textDecoration: 'none', display: 'inline-block' }}>
-            Get a Quote for {service.title}
-          </Link>
-        </div>
-
         <ContactForm />
       </div>
     </div>
