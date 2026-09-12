@@ -52,9 +52,9 @@ const ServiceDetail = () => {
           <p style={{ fontSize: '1.1rem', lineHeight: '1.8', opacity: 0.9 }}>{service.content}</p>
 
           <div style={{ marginTop: '40px' }}>
-            <a href="#contact" className="btn-primary" style={{ textDecoration: 'none', display: 'inline-block' }}>
+            <Link to="/#contact" className="btn-primary" style={{ textDecoration: 'none', display: 'inline-block' }}>
               Get a Quote for {service.title}
-            </a>
+            </Link>
           </div>
         </div>
       </div>
