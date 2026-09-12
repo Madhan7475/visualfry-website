@@ -35,66 +35,65 @@ const Work = () => {
   };
 
   return (
-    <section id="work">
+    <section id="work" className="portfolio-section">
       <div className="wrap">
         <div className="section-head reveal">
           <span className="eyebrow">Our work</span>
-          <h2>A look at what we've shipped.</h2>
-          <p>A mix of edits, motion pieces, and property films from recent projects. Replace each slot below with your own image or video.</p>
+          <h2 className="portfolio-title">A look at what we've shipped.</h2>
+          <p className="portfolio-sub">From high-end cinematic films to precise digital designs, we transform raw materials into visual stories that convert.</p>
         </div>
 
-        <div className="work-grid reveal">
+        <div className="portfolio-grid reveal">
           {workItems.map((item, idx) => (
             <div
-              key={idx}
+              key={item.id || idx}
               onClick={() => item.type === 'Video' ? handleOpenVideo(item.url) : null}
-              className={`work-card ${item.wide ? 'wide' : ''} ${item.full ? 'full' : ''}`}
+              className={`portfolio-card ${item.wide ? 'wide' : ''} ${item.full ? 'full' : ''}`}
               style={{
-                textDecoration: 'none',
-                color: 'inherit',
                 cursor: item.type === 'Video' ? 'pointer' : 'default'
               }}
             >
-              <span className="tag">{item.type}</span>
-              <div className="placeholder">
+              <div className="portfolio-media-wrap">
                 {item.type === 'Video' && getThumbnailUrl(item.url) ? (
-                  <img src={getThumbnailUrl(item.url)} alt={item.title} className="work-thumbnail" />
+                  <img src={getThumbnailUrl(item.url)} alt={item.title} className="portfolio-thumbnail" />
                 ) : item.type === 'Photo' && item.url !== '#' ? (
-                  <img src={item.url} alt={item.title} className="work-thumbnail" />
+                  <img src={item.url} alt={item.title} className="portfolio-thumbnail" />
                 ) : (
-                  <>
+                  <div className="portfolio-placeholder">
                     {item.type === 'Video' ? (
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="2" y="5" width="15" height="14" rx="2"/><path d="M17 10l5-3v10l-5-3"/></svg>
                     ) : (
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
                     )}
                     <span>Add {item.type === 'Video' ? 'video' : 'image'}</span>
-                  </>
+                  </div>
                 )}
+                {item.hasPlay && (
+                  <div className="portfolio-play-overlay">
+                    <div className="play-btn">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--violet)"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                  </div>
+                )}
+                <div className="portfolio-tag">{item.type}</div>
               </div>
-              {item.hasPlay && (
-                <div className="play-icon">
-                  <span>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--violet)"><path d="M8 5v14l11-7z"/></svg>
-                  </span>
-                </div>
-              )}
-              <div className="caption">
-                <h4>{item.title}</h4>
+              <div className="portfolio-info">
+                <h3>{item.title}</h3>
                 <p>{item.desc}</p>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="work-gallery reveal">
+        <div className="portfolio-gallery reveal">
+          <div className="gallery-label">Quick View Gallery</div>
           <div className="marquee">
             <div className="marquee-track">
               {galleryImages.map((img, idx) => (
-                <img key={idx} src={img.url} alt={img.alt} className="gallery-img" />
+                <img key={idx} src={img.url} alt={img.alt} className="gallery-item" />
               ))}
               {galleryImages.map((img, idx) => (
-                <img key={`dup-${idx}`} src={img.url} alt={img.alt} className="gallery-img" />
+                <img key={`dup-${idx}`} src={img.url} alt={img.alt} className="gallery-item" />
               ))}
             </div>
           </div>

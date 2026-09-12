@@ -4,6 +4,7 @@ export const WorkContext = createContext();
 
 const DEFAULT_WORK_DATA = [
   {
+    id: 1,
     type: "Video",
     title: "Featured project",
     desc: "Real estate walkthrough film",
@@ -47,7 +48,24 @@ export const WorkProvider = ({ children }) => {
 
   const addWorkItem = (item) => {
     setWorkItems((prev) => {
-      const newItems = [...prev, item];
+      const newItem = { ...item, id: Date.now() };
+      const newItems = [...prev, newItem];
+      localStorage.setItem('vfs_work_data', JSON.stringify(newItems));
+      return newItems;
+    });
+  };
+
+  const deleteWorkItem = (id) => {
+    setWorkItems((prev) => {
+      const newItems = prev.filter(item => item.id !== id);
+      localStorage.setItem('vfs_work_data', JSON.stringify(newItems));
+      return newItems;
+    });
+  };
+
+  const updateWorkItem = (id, updatedItem) => {
+    setWorkItems((prev) => {
+      const newItems = prev.map(item => item.id === id ? { ...item, ...updatedItem } : item);
       localStorage.setItem('vfs_work_data', JSON.stringify(newItems));
       return newItems;
     });
@@ -62,8 +80,16 @@ export const WorkProvider = ({ children }) => {
   };
 
   return (
-    <WorkContext.Provider value={{ workItems, galleryImages, addWorkItem, addGalleryImage }}>
+    <WorkContext.Provider value={{
+      workItems,
+      galleryImages,
+      addWorkItem,
+      deleteWorkItem,
+      updateWorkItem,
+      addGalleryImage
+    }}>
       {children}
     </WorkContext.Provider>
   );
+
 };

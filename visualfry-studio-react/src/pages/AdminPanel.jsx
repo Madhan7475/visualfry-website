@@ -2,7 +2,8 @@ import React, { useState, useContext } from 'react';
 import { WorkContext } from '../context/WorkContext';
 
 const AdminPanel = () => {
-  const { workItems, addWorkItem, galleryImages, addGalleryImage } = useContext(WorkContext);
+  const { workItems, addWorkItem, deleteWorkItem, updateWorkItem } = useContext(WorkContext);
+  const [editingId, setEditingId] = useState(null);
   const [item, setItem] = useState({
     type: 'Video',
     title: '',
@@ -21,9 +22,31 @@ const AdminPanel = () => {
     }));
   };
 
+  const handleFileUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setItem(prev => ({
+          ...prev,
+          type: 'Photo',
+          url: reader.result
+        }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    addWorkItem(item);
+    if (editingId) {
+      updateWorkItem(editingId, item);
+      setEditingId(null);
+      alert('Work item updated successfully!');
+    } else {
+      addWorkItem(item);
+      alert('Work item added successfully!');
+    }
     setItem({
       type: 'Video',
       title: '',
@@ -33,7 +56,24 @@ const AdminPanel = () => {
       full: false,
       hasPlay: true
     });
-    alert('Work item added successfully!');
+  };
+
+  const startEdit = (wi) => {
+    setEditingId(wi.id);
+    setItem({ ...wi });
+  };
+
+  const cancelEdit = () => {
+    setEditingId(null);
+    setItem({
+      type: 'Video',
+      title: '',
+      desc: '',
+      url: '',
+      wide: false,
+      full: false,
+      hasPlay: true
+    });
   };
 
   return (
@@ -42,18 +82,18 @@ const AdminPanel = () => {
         <div className="section-head">
           <span className="eyebrow">Admin Panel</span>
           <h2>Manage Your Portfolio</h2>
-          <p>Add new videos and images to your work gallery.</p>
+          <p>Add new videos and images to your work gallery. Note: Image uploads are stored locally (base64) for prototype purposes.</p>
         </div>
 
         <div className="admin-grid">
           <div className="admin-card">
-            <h3>Add New Work Item</h3>
+            <h3>{editingId ? 'Edit Work Item' : 'Add New Work Item'}</h3>
             <form onSubmit={handleSubmit}>
               <div className="form-group">
                 <label>Type</label>
                 <select name="type" value={item.type} onChange={handleInputChange}>
-                  <option value="Video">Video</option>
-                  <option value="Photo">Photo</option>
+                  <option value="Video">Video (YouTube link)</option>
+                  <option value="Photo">Photo (Direct upload/URL)</option>
                 </select>
               </div>
               <div className="form-group">
@@ -79,7 +119,7 @@ const AdminPanel = () => {
                 />
               </div>
               <div className="form-group">
-                <label>URL (YouTube or Image link)</label>
+                <label>URL / Link</label>
                 <input
                   type="text"
                   name="url"
@@ -88,6 +128,10 @@ const AdminPanel = () => {
                   placeholder="https://..."
                   required
                 />
+              </div>
+              <div className="form-group">
+                <label>Direct Image Upload</label>
+                <input type="file" accept="image/*" onChange={handleFileUpload} />
               </div>
               <div className="form-row">
                 <div className="checkbox-group">
@@ -121,17 +165,26 @@ const AdminPanel = () => {
                   <label htmlFor="hasPlay">Show Play Icon</label>
                 </div>
               </div>
-              <button type="submit" className="btn-submit">Add to Portfolio</button>
+              <div className="form-actions">
+                <button type="submit" className="btn-submit">{editingId ? 'Update Portfolio' : 'Add to Portfolio'}</button>
+                {editingId && <button type="button" className="btn-ghost" onClick={cancelEdit}>Cancel</button>}
+              </div>
             </form>
           </div>
 
           <div className="admin-list">
             <h3>Current Items ({workItems.length})</h3>
             <div className="items-grid">
-              {workItems.map((wi, idx) => (
-                <div key={idx} className="item-preview">
-                  <strong>{wi.title}</strong> ({wi.type})
-                  <span className="item-url">{wi.url}</span>
+              {workItems.map((wi) => (
+                <div key={wi.id} className="item-preview">
+                  <div className="item-details">
+                    <strong>{wi.title}</strong> ({wi.type})
+                    <span className="item-url">{wi.url.substring(0, 40)}...</span>
+                  </div>
+                  <div className="item-actions">
+                    <button onClick={() => startEdit(wi)} className="btn-edit">Edit</button>
+                    <button onClick={() => deleteWorkItem(wi.id)} className="btn-delete">Delete</button>
+                  </div>
                 </div>
               ))}
             </div>
