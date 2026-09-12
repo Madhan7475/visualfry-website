@@ -472,7 +472,10 @@
 
   /* ===== Mobile tuning ===== */
   @media (max-width:960px){
-    .hero-character{ display:none; }
+    /* removed hero-character display:none */
+  }
+  @media (max-width:640px){
+    .hero-character{ width: 80vw; }
   }
   @media (max-width:760px){
     section{padding:72px 0;}
