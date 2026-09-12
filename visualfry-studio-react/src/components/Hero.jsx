@@ -3,8 +3,8 @@ import React from 'react';
 const Hero = () => {
   return (
     <section className="hero">
-      <img className="hero-character" src="/men.png" alt="Visualfry Studio" />
       <div className="wrap">
+        <img className="hero-character" src="/ganesha.png" alt="Visualfry Studio" />
         <span className="eyebrow">Creative service from Bangalore</span>
         <h1><span className="grad">Happy Ganesh Chaturthi!</span></h1>
         <p className="sub">
