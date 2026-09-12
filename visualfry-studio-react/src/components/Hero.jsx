@@ -6,7 +6,7 @@ const Hero = () => {
       <div className="wrap">
         <img className="hero-character" src="/ganesha.png" alt="Visualfry Studio" />
         <span className="eyebrow">Creative service from Bangalore</span>
-        <h1><span className="grad">Happy Ganesh Chaturthi!</span></h1>
+        <h1 className="festive-font"><span className="grad">Happy Ganesh Chaturthi!</span></h1>
         <p className="sub">
           Visualfry Studio is your creative partner for video production, photography, graphic design, web & app development, and digital marketing—helping brands create, grow, and stand out with impactful creative solutions.
         </p>
