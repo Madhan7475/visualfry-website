@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visualfry Studio — We Visualize. You Realize.</title>
+<meta name="description" content="Visualfry Studio — creative outsourcing for video editing, photo editing, graphic design, motion graphics, virtual staging and more.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ffffff;
+    --bg-elevated:#f6f3fb;
+    --bg-card:#fbfaff;
+    --bg-dark:#150e24;
+    --border:rgba(90,50,160,0.12);
+    --border-strong:rgba(90,50,160,0.26);
+    --violet:#7c3aed;
+    --violet-bright:#8b3ffb;
+    --ember:#ff6a45;
+    --ember-soft:#d9532f;
+    --text:#160f22;
+    --text-muted:#5c5470;
+    --text-faint:#948aad;
+    --radius:18px;
+    --maxw:1240px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter', sans-serif;
+    line-height:1.5;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{font-family:'Space Grotesk', sans-serif; font-weight:600; letter-spacing:-0.02em;}
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  ::selection{background:var(--violet); color:#fff;}
+
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 32px;}
+  @media (max-width:640px){ .wrap{padding:0 20px;} }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--ember-soft);
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:6px; height:6px; border-radius:50%;
+    background:var(--ember);
+    box-shadow:0 0 10px var(--ember);
+  }
+
+  /* ===== Ambient background glow (signature element base) ===== */
+  .glow-field{
+    position:fixed; inset:0; z-index:-1; overflow:hidden; pointer-events:none;
+  }
+  .glow-field .orb{
+    position:absolute; border-radius:50%; filter:blur(90px); opacity:0.55;
+  }
+  .glow-field .orb.o1{
+    width:620px; height:620px; top:-220px; left:-160px;
+    background:radial-gradient(circle at 30% 30%, var(--violet), transparent 70%);
+    opacity:0.16;
+  }
+  .glow-field .orb.o2{
+    width:500px; height:500px; top:280px; right:-200px;
+    background:radial-gradient(circle at 60% 40%, var(--ember), transparent 70%);
+    opacity:0.12;
+  }
+  .glow-field .grain{
+    position:absolute; inset:0;
+    background-image:radial-gradient(rgba(20,10,45,0.035) 1px, transparent 1px);
+    background-size:3px 3px;
+  }
+
+  /* ===== Nav ===== */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(255,255,255,0.78);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--border);
+  }
+  nav.wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:76px;
+  }
+  .brand{display:flex; align-items:center; gap:10px; font-family:'Space Grotesk'; font-weight:700; font-size:19px;}
+  .brand .mark{
+    width:30px; height:30px; border-radius:50%;
+    background:conic-gradient(from 210deg, var(--ember), var(--violet), var(--ember));
+    position:relative;
+    box-shadow:0 0 18px rgba(139,63,251,0.55);
+  }
+  .brand .mark::after{
+    content:""; position:absolute; inset:9px; border-radius:50%; background:var(--bg);
+  }
+  .nav-links{display:flex; gap:36px; font-size:14.5px; color:var(--text-muted);}
+  .nav-links a{transition:color .2s;}
+  .nav-links a:hover{color:var(--text);}
+  .nav-right{display:flex; align-items:center; gap:14px;}
+  .nav-cta{
+    font-size:14px; font-weight:500; padding:10px 20px; border-radius:100px;
+    background:var(--text); color:var(--bg);
+    transition:transform .2s, box-shadow .2s;
+  }
+  .nav-cta:hover{transform:translateY(-1px); box-shadow:0 8px 24px rgba(165,104,255,0.35);}
+  .nav-toggle{display:none; background:none; border:0; color:var(--text); font-size:22px; cursor:pointer; padding:6px; line-height:1;}
+  @media (max-width:860px){
+    .nav-links{
+      display:flex; flex-direction:column; align-items:flex-start; gap:0;
+      position:absolute; top:76px; left:0; right:0;
+      background:var(--bg); border-bottom:1px solid var(--border);
+      max-height:0; overflow:hidden; opacity:0;
+      transition:max-height .3s ease, opacity .25s ease;
+    }
+    .nav-links.open{ max-height:320px; opacity:1; }
+    .nav-links a{ width:100%; padding:16px 24px; border-top:1px solid var(--border); font-size:15.5px; }
+    .nav-toggle{display:block;}
+    .nav-cta{ padding:9px 16px; font-size:13.5px; }
+  }
+
+  /* ===== Hero ===== */
+  .hero{
+    padding:120px 0 100px;
+    text-align:center;
+    position:relative;
+  }
+  .hero-character{
+    position:absolute;
+    left:2vw;
+    bottom:0;
+    width:min(300px, 20vw);
+    z-index:1;
+    pointer-events:none;
+    filter:drop-shadow(0 20px 40px rgba(90,50,160,0.18));
+  }
+  .hero .eyebrow{margin-bottom:26px;}
+  .hero h1{
+    font-size:clamp(40px, 7vw, 88px);
+    line-height:1.02;
+    max-width:920px;
+    margin:0 auto;
+  }
+  .hero h1 .grad{
+    background:linear-gradient(100deg, var(--ember) 0%, var(--violet-bright) 60%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .hero p.sub{
+    max-width:560px; margin:26px auto 0;
+    font-size:17.5px; color:var(--text-muted);
+  }
+  .hero .cta-row{
+    display:flex; gap:16px; justify-content:center; margin-top:40px; flex-wrap:wrap;
+  }
+  .btn-primary{
+    background:linear-gradient(100deg, var(--ember), var(--violet));
+    color:#fff; padding:15px 30px; border-radius:100px; font-weight:600; font-size:15px;
+    box-shadow:0 10px 30px rgba(139,63,251,0.35);
+    transition:transform .2s, box-shadow .2s;
+  }
+  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 14px 36px rgba(139,63,251,0.5);}
+  .btn-ghost{
+    border:1px solid var(--border-strong); color:var(--text);
+    padding:15px 28px; border-radius:100px; font-weight:500; font-size:15px;
+    transition:background .2s, border-color .2s;
+  }
+  .btn-ghost:hover{background:var(--bg-card); border-color:var(--violet-bright);}
+
+  /* ===== Trust strip ===== */
+  .trust{
+    border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+    padding:34px 0;
+  }
+  .trust .wrap{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:24px; text-align:center;
+  }
+  .trust h4{font-size:15px; margin-bottom:6px;}
+  .trust p{font-size:13px; color:var(--text-muted); line-height:1.5;}
+  @media (max-width:760px){ .trust .wrap{grid-template-columns:repeat(2,1fr);} }
+
+  /* ===== Section shell ===== */
+  section{padding:110px 0;}
+  .section-head{max-width:640px; margin-bottom:60px;}
+  .section-head h2{font-size:clamp(30px, 4vw, 46px); margin-top:16px;}
+  .section-head p{color:var(--text-muted); font-size:16px; margin-top:16px;}
+
+  /* ===== Services ===== */
+  .cat-block{margin-bottom:56px;}
+  .cat-block:last-child{margin-bottom:0;}
+  .cat-label{
+    font-family:'IBM Plex Mono', monospace; font-size:12.5px; letter-spacing:0.1em;
+    text-transform:uppercase; color:var(--text-faint);
+    display:flex; align-items:center; gap:14px; margin-bottom:22px;
+  }
+  .cat-label::after{content:""; flex:1; height:1px; background:var(--border);}
+  .service-grid{
+    display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:18px;
+  }
+  .service-card{
+    background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius);
+    padding:26px; position:relative; overflow:hidden;
+    transition:border-color .25s, transform .25s;
+  }
+  .service-card:hover{border-color:var(--border-strong); transform:translateY(-4px);}
+  .service-card::before{
+    content:""; position:absolute; top:-40%; right:-40%; width:70%; height:70%;
+    background:radial-gradient(circle, var(--violet), transparent 70%);
+    opacity:0; filter:blur(30px); transition:opacity .3s;
+  }
+  .service-card:hover::before{opacity:0.25;}
+  .service-card i {
+    display: block;
+    margin-bottom: 14px;
+    color: var(--violet);
+    width: 24px;
+    height: 24px;
+  }
+  .service-card h3{font-size:18px; margin-bottom:10px; position:relative;}
+  .service-card p{font-size:14px; color:var(--text-muted); position:relative;}
+  .service-card .num{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--text-faint);
+    margin-bottom:14px; display:block;
+  }
+
+  /* ===== Our Work ===== */
+  .work-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:18px;
+  }
+  .work-card{
+    position:relative; border-radius:var(--radius); overflow:hidden;
+    border:1px solid var(--border); background:var(--bg-card);
+    aspect-ratio:4/3;
+  }
+  .work-card.wide{ grid-column:span 2; aspect-ratio:16/9; }
+  .work-card .work-media{
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; display:block;
+    background:linear-gradient(150deg, var(--bg-elevated), var(--bg-card));
+  }
+  .work-card .placeholder{
+    position:absolute; inset:0; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; gap:10px;
+    background:linear-gradient(150deg, var(--bg-elevated), var(--bg-card));
+    color:var(--text-faint);
+  }
+  .work-card .placeholder svg{ width:34px; height:34px; opacity:0.55; }
+  .work-card .placeholder span{
+    font-family:'IBM Plex Mono', monospace; font-size:11.5px; letter-spacing:0.06em;
+    text-transform:uppercase;
+  }
+  .work-card .tag{
+    position:absolute; top:14px; left:14px; z-index:2;
+    font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.08em;
+    text-transform:uppercase; color:#fff; background:rgba(20,10,35,0.55);
+    backdrop-filter:blur(6px);
+    padding:6px 12px; border-radius:100px;
+  }
+  .work-card .caption{
+    position:absolute; left:0; right:0; bottom:0; z-index:2;
+    padding:16px; color:#fff;
+    background:linear-gradient(0deg, rgba(10,5,20,0.7), transparent);
+    opacity:0; transform:translateY(6px);
+    transition:opacity .25s, transform .25s;
+  }
+  .work-card:hover .caption{ opacity:1; transform:translateY(0); }
+  .work-card .caption h4{ font-size:15px; margin-bottom:2px; }
+  .work-card .caption p{ font-size:12.5px; color:rgba(255,255,255,0.75); }
+  .work-card .play-icon{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center; z-index:2;
+    pointer-events:none;
+  }
+  .work-card .play-icon span{
+    width:52px; height:52px; border-radius:50%;
+    background:rgba(255,255,255,0.9);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 8px 24px rgba(0,0,0,0.25);
+    transition:transform .25s;
+  }
+  .work-card:hover .play-icon span{ transform:scale(1.08); }
+  .work-note{
+    margin-top:24px; font-size:13.5px; color:var(--text-faint);
+  }
+  @media (max-width:860px){
+    .work-grid{grid-template-columns:repeat(2,1fr);}
+    .work-card.wide{grid-column:span 2;}
+  }
+  @media (max-width:600px){
+    .work-grid{grid-template-columns:1fr;}
+    .work-card.wide{grid-column:span 1;}
+  }
+
+  /* ===== Clients marquee ===== */
+  .clients{
+    padding:70px 0 90px;
+    border-top:1px solid var(--border);
+  }
+  .clients .section-head{margin-bottom:36px;}
+  .marquee{
+    position:relative;
+    overflow:hidden;
+    mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    -webkit-mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+  .marquee-track{
+    display:flex;
+    width:max-content;
+    gap:64px;
+    align-items:center;
+    animation:scroll-left 28s linear infinite;
+  }
+  .marquee:hover .marquee-track{ animation-play-state:paused; }
+  .client-logo{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    font-size:22px;
+    color:var(--text-faint);
+    white-space:nowrap;
+    letter-spacing:-0.01em;
+    opacity:0.75;
+    transition:opacity .25s, color .25s;
+  }
+  .client-logo:hover{ color:var(--violet); opacity:1; }
+  @keyframes scroll-left{
+    from{ transform:translateX(0); }
+    to{ transform:translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .marquee-track{ animation:none; }
+  }
+
+  /* ===== About ===== */
+  .about{
+    background:var(--bg-elevated); border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+  }
+  .about-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:center;
+  }
+  .about h2{font-size:clamp(28px,4vw,42px); margin:16px 0 20px;}
+  .about p{color:var(--text-muted); font-size:16px; margin-bottom:16px;}
+  .about-visual{
+    aspect-ratio:1/1; border-radius:24px; position:relative; overflow:hidden;
+    background:linear-gradient(150deg, var(--bg-card), #0d0818);
+    border:1px solid var(--border);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .about-visual .big-mark{
+    width:55%; aspect-ratio:1/1; border-radius:50%;
+    background:conic-gradient(from 200deg, var(--ember), var(--violet), var(--ember));
+    filter:blur(0.5px);
+    box-shadow:0 0 90px rgba(139,63,251,0.4);
+    position:relative;
+  }
+  .about-visual .big-mark::after{content:""; position:absolute; inset:14%; border-radius:50%; background:var(--bg-elevated);}
+  @media (max-width:860px){ .about-grid{grid-template-columns:1fr; gap:40px;} }
+
+  /* ===== Process ===== */
+  .process-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  .process-card{
+    border:1px solid var(--border); border-radius:var(--radius); padding:30px;
+    background:linear-gradient(180deg, var(--bg-card), transparent);
+  }
+  .process-card .step{
+    font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--ember-soft); margin-bottom:16px;
+  }
+  .process-card h3{font-size:19px; margin-bottom:10px;}
+  .process-card p{font-size:14.5px; color:var(--text-muted);}
+  @media (max-width:860px){ .process-grid{grid-template-columns:1fr;} }
+
+  /* ===== CTA ===== */
+  .cta-section{text-align:center; position:relative;}
+  .cta-section h2{font-size:clamp(32px, 5vw, 56px); max-width:760px; margin:0 auto 18px;}
+  .cta-section p{color:var(--text-muted); font-size:16px; max-width:520px; margin:0 auto 34px;}
+
+  /* ===== Contact form ===== */
+  .contact-form-section{
+    border-top:1px solid var(--border);
+  }
+  .contact-grid{
+    display:grid; grid-template-columns:0.9fr 1.1fr; gap:70px; align-items:start;
+  }
+  .contact-info h2{font-size:clamp(28px,4vw,42px); margin:16px 0 18px;}
+  .contact-info p{color:var(--text-muted); font-size:16px; margin-bottom:28px; max-width:420px;}
+  .contact-detail{display:flex; align-items:flex-start; gap:14px; margin-bottom:20px;}
+  .contact-detail .dot{
+    width:34px; height:34px; border-radius:50%; flex-shrink:0;
+    background:linear-gradient(135deg, var(--ember), var(--violet));
+    opacity:0.85;
+  }
+  .contact-detail h4{font-size:14px; margin-bottom:3px;}
+  .contact-detail p{margin:0; font-size:14.5px; color:var(--text-muted); max-width:none;}
+
+  .contact-form{
+    background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius);
+    padding:36px;
+  }
+  .form-row{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  .form-field{margin-bottom:20px;}
+  .form-field label{
+    display:block; font-size:13px; font-weight:500; color:var(--text-muted); margin-bottom:8px;
+  }
+  .form-field input, .form-field select, .form-field textarea{
+    width:100%; font-family:'Inter', sans-serif; font-size:14.5px; color:var(--text);
+    background:var(--bg); border:1px solid var(--border-strong); border-radius:10px;
+    padding:13px 14px; outline:none; transition:border-color .2s, box-shadow .2s;
+  }
+  .form-field textarea{resize:vertical; min-height:110px; font-family:'Inter', sans-serif;}
+  .form-field input:focus, .form-field select:focus, .form-field textarea:focus{
+    border-color:var(--violet); box-shadow:0 0 0 3px rgba(124,58,237,0.14);
+  }
+  .form-submit{
+    width:100%; border:none; cursor:pointer;
+    background:linear-gradient(100deg, var(--ember), var(--violet));
+    color:#fff; padding:15px 30px; border-radius:100px; font-weight:600; font-size:15px;
+    box-shadow:0 10px 30px rgba(139,63,251,0.25);
+    transition:transform .2s, box-shadow .2s;
+  }
+  .form-submit:hover{transform:translateY(-2px); box-shadow:0 14px 36px rgba(139,63,251,0.4);}
+  .form-note{font-size:12.5px; color:var(--text-faint); margin-top:14px; text-align:center;}
+  @media (max-width:860px){
+    .contact-grid{grid-template-columns:1fr; gap:36px;}
+    .form-row{grid-template-columns:1fr;}
+  }
+
+  /* ===== Footer ===== */
+  footer{border-top:1px solid var(--border); padding:60px 0 40px;}
+  .footer-grid{
+    display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:40px; padding-bottom:40px;
+  }
+  .footer-grid h4{font-size:14px; margin-bottom:16px; color:var(--text);}
+  .footer-grid p, .footer-grid a{font-size:14px; color:var(--text-muted); display:block; margin-bottom:10px;}
+  .footer-grid a:hover{color:var(--text);}
+  .footer-bottom{
+    border-top:1px solid var(--border); padding-top:24px;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;
+    font-size:13px; color:var(--text-faint);
+  }
+  @media (max-width:760px){ .footer-grid{grid-template-columns:1fr; gap:28px;} }
+
+  /* reveal animation */
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+
+  /* ===== Mobile tuning ===== */
+  @media (max-width:960px){
+    .hero-character{ display:none; }
+  }
+  @media (max-width:760px){
+    section{padding:72px 0;}
+    .hero{padding:56px 0 64px;}
+    .hero .cta-row{flex-direction:column; align-items:stretch;}
+    .hero .cta-row a{text-align:center;}
+    .section-head{margin-bottom:40px;}
+    .service-grid{grid-template-columns:1fr; gap:14px;}
+    .process-card, .service-card{padding:22px;}
+    .contact-form{padding:24px;}
+    .trust .wrap{gap:28px 20px;}
+    .about-visual{max-width:280px; margin:0 auto;}
+    .cta-section .btn-primary{width:100%;}
+  }
+  @media (max-width:420px){
+    .brand{font-size:16px;}
+    .brand .mark{width:26px; height:26px;}
+    nav.wrap{height:64px;}
+    .nav-links{top:64px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="glow-field">
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="grain"></div>
+</div>
+
+<header>
+  <nav class="wrap">
+    <div class="brand"><span class="mark"></span> Visualfry Studio</div>
+    <div class="nav-links" id="navLinks">
+      <a href="#services">Services</a>
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#process">How it works</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-right">
+      <a href="#contact" class="nav-cta">Start a project</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <img class="hero-character" src="assets/hero-character.png" alt="Visualfry Studio">
+    <div class="wrap">
+      <h1>We visualize.<br><span class="grad">You realize.</span></h1>
+      <p class="sub">Visualfry Studio is your express gateway for video, photo, and design work — a full creative bench for brands that need premium visual output without building an in-house team.</p>
+      <div class="cta-row">
+        <a href="#contact" class="btn-primary">Get a free quote</a>
+        <a href="#services" class="btn-ghost">Explore services</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="trust">
+    <div class="wrap">
+      <div><h4>Every budget covered</h4><p>Hourly or project-based pricing that scales with you.</p></div>
+      <div><h4>Fast turnarounds</h4><p>The right team starts working within minutes, not days.</p></div>
+      <div><h4>Protected payments</h4><p>Funds release only once your project is complete.</p></div>
+      <div><h4>24/7 support</h4><p>A team on call around the clock, wherever you are.</p></div>
+    </div>
+  </div>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">What we do</span>
+        <h2>Thirteen crafts. One studio.</h2>
+        <p>From a single logo to a full drone-shot property film, every service below is delivered by a specialist team and reviewed before it reaches you.</p>
+      </div>
+
+      <div class="cat-block reveal">
+        <div class="cat-label">Motion & Film</div>
+        <div class="service-grid">
+          <div class="service-card"><span class="num">01</span><i data-lucide="film"></i><h3>Video Editing</h3><p>The craft that turns raw footage into something that actually moves people.</p></div>
+          <div class="service-card"><span class="num">02</span><i data-lucide="clapperboard"></i><h3>Motion Graphics</h3><p>Your ideas, animated into graphics with a professional voice behind them.</p></div>
+          <div class="service-card"><span class="num">03</span><i data-lucide="sparkles"></i><h3>Visual Effects</h3><p>If you can dream the shot, our team can build it, frame by frame.</p></div>
+          <div class="service-card"><span class="num">04</span><i data-lucide="plane"></i><h3>Drone Video Solutions</h3><p>Sky-high footage, professionally edited and color graded for impact.</p></div>
+        </div>
+      </div>
+
+      <div class="cat-block reveal">
+        <div class="cat-label">Photography & Design</div>
+        <div class="service-grid">
+          <div class="service-card"><span class="num">05</span><i data-lucide="image"></i><h3>Photo Editing</h3><p>The shutter is only step one — the edit is where the image is really made.</p></div>
+          <div class="service-card"><span class="num">06</span><i data-lucide="palette"></i><h3>Graphic Design</h3><p>Design isn't what you see, it's what you make everyone else see.</p></div>
+          <div class="service-card"><span class="num">07</span><i data-lucide="bar-chart-3"></i><h3>Info Graphics</h3><p>Data that reads like a story — because people feel what they can see.</p></div>
+        </div>
+      </div>
+
+      <div class="cat-block reveal">
+        <div class="cat-label">Real Estate & Spaces</div>
+        <div class="service-grid">
+          <div class="service-card"><span class="num">08</span><i data-lucide="home"></i><h3>Real Estate Video Editing</h3><p>Polished property films built to move listings faster.</p></div>
+          <div class="service-card"><span class="num">09</span><i data-lucide="armchair"></i><h3>Virtual Staging</h3><p>Buyers can't picture what isn't there — we furnish empty rooms virtually.</p></div>
+          <div class="service-card"><span class="num">10</span><i data-lucide="box"></i><h3>Matterport 3D</h3><p>Turn any property into an interactive, walkable 3D space.</p></div>
+        </div>
+      </div>
+
+      <div class="cat-block reveal">
+        <div class="cat-label">Content & Social</div>
+        <div class="service-grid">
+          <div class="service-card"><span class="num">11</span><i data-lucide="smartphone"></i><h3>Social Media Video Editing</h3><p>Scroll-stopping edits built to grow followers and engagement.</p></div>
+          <div class="service-card"><span class="num">12</span><i data-lucide="globe"></i><h3>Travel Video Editing</h3><p>Your best adventures, cut together with a cinematic touch.</p></div>
+          <div class="service-card"><span class="num">13</span><i data-lucide="mic"></i><h3>Podcast Editing</h3><p>Clean, noise-free audio so the right words land at the right time.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Our work</span>
+        <h2>A look at what we've shipped.</h2>
+        <p>A mix of edits, motion pieces, and property films from recent projects. Replace each slot below with your own image or video.</p>
+      </div>
+
+      <!--
+        HOW TO ADD YOUR OWN WORK:
+        - Image slot: replace the <div class="placeholder">...</div> inside a card with
+          <img class="work-media" src="your-image.jpg" alt="Project name">
+        - Video slot: replace the <div class="placeholder">...</div> with
+          <video class="work-media" src="your-video.mp4" poster="thumbnail.jpg" muted loop playsinline controls></video>
+        - Keep the .tag and .caption blocks to label each piece.
+      -->
+      <div class="work-grid reveal">
+
+        <div class="work-card wide">
+          <span class="tag">Video</span>
+          <div class="placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="15" height="14" rx="2"/><path d="M17 10l5-3v10l-5-3"/></svg>
+            <span>Add video</span>
+          </div>
+          <div class="play-icon"><span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--violet)"><path d="M8 5v14l11-7z"/></svg>
+          </span></div>
+          <div class="caption"><h4>Featured project</h4><p>Real estate walkthrough film</p></div>
+        </div>
+
+        <div class="work-card">
+          <span class="tag">Photo</span>
+          <div class="placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Add image</span>
+          </div>
+          <div class="caption"><h4>Product shoot</h4><p>Photo editing & retouch</p></div>
+        </div>
+
+        <div class="work-card">
+          <span class="tag">Design</span>
+          <div class="placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Add image</span>
+          </div>
+          <div class="caption"><h4>Brand campaign</h4><p>Graphic design</p></div>
+        </div>
+
+        <div class="work-card">
+          <span class="tag">Video</span>
+          <div class="placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="15" height="14" rx="2"/><path d="M17 10l5-3v10l-5-3"/></svg>
+            <span>Add video</span>
+          </div>
+          <div class="play-icon"><span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--violet)"><path d="M8 5v14l11-7z"/></svg>
+          </span></div>
+          <div class="caption"><h4>Social reel</h4><p>Social media video editing</p></div>
+        </div>
+
+        <div class="work-card wide">
+          <span class="tag">3D / Staging</span>
+          <div class="placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Add image</span>
+          </div>
+          <div class="caption"><h4>Empty to furnished</h4><p>Virtual staging</p></div>
+        </div>
+
+      </div>
+      <p class="work-note reveal">More case studies available on request — email contact@visualfry.com for the full portfolio.</p>
+    </div>
+  </section>
+
+  <section class="clients">
+    <div class="wrap">
+      <div class="section-head reveal" style="margin-bottom:0;">
+        <span class="eyebrow">Trusted by</span>
+        <h2 style="font-size:clamp(24px,3vw,32px); margin-top:14px;">Brands we've worked alongside</h2>
+      </div>
+    </div>
+    <div class="marquee reveal" style="margin-top:34px;">
+      <div class="marquee-track">
+        <span class="client-logo">Client Name One</span>
+        <span class="client-logo">Client Name Two</span>
+        <span class="client-logo">Client Name Three</span>
+        <span class="client-logo">Client Name Four</span>
+        <span class="client-logo">Client Name Five</span>
+        <span class="client-logo">Client Name Six</span>
+        <!-- duplicated for seamless loop -->
+        <span class="client-logo" aria-hidden="true">Client Name One</span>
+        <span class="client-logo" aria-hidden="true">Client Name Two</span>
+        <span class="client-logo" aria-hidden="true">Client Name Three</span>
+        <span class="client-logo" aria-hidden="true">Client Name Four</span>
+        <span class="client-logo" aria-hidden="true">Client Name Five</span>
+        <span class="client-logo" aria-hidden="true">Client Name Six</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="wrap about-grid">
+      <div class="reveal">
+        <span class="eyebrow">Who we are</span>
+        <h2>Part of the visual world, built for yours.</h2>
+        <p>Visualfry Studio provides creative outsourcing for brands around the globe — we create, edit, and transform digital content for every visual need a growing business runs into.</p>
+        <p>Based in Bangalore, we work as an extension of your team: briefed like an in-house department, billed like an agency, and available whenever the next deadline lands.</p>
+        <a href="#contact" class="btn-ghost">Talk to the studio</a>
+      </div>
+      <div class="about-visual reveal">
+        <div class="big-mark"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="process">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">How it works</span>
+        <h2>Three steps from brief to delivery.</h2>
+      </div>
+      <div class="process-grid reveal">
+        <div class="process-card">
+          <div class="step">Step 01</div>
+          <h3>Tell us the brief</h3>
+          <p>Share your footage, brand assets, or a rough idea — we scope the right service and team for it.</p>
+        </div>
+        <div class="process-card">
+          <div class="step">Step 02</div>
+          <h3>We create, you review</h3>
+          <p>A dedicated specialist works your project with drafts along the way, not just a final drop.</p>
+        </div>
+        <div class="process-card">
+          <div class="step">Step 03</div>
+          <h3>Approve and launch</h3>
+          <p>Payment releases only once you're happy — then your asset is ready to publish.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="wrap reveal">
+      <span class="eyebrow">Ready when you are</span>
+      <h2 style="margin-top:16px;">Bring us the raw material. We'll bring the craft.</h2>
+      <p>Tell us what you're building and we'll match you with the right creative team within minutes.</p>
+      <a href="mailto:contact@visualfry.com" class="btn-primary">contact@visualfry.com</a>
+    </div>
+  </section>
+</main>
+
+  <section class="contact-form-section" id="contact">
+    <div class="wrap contact-grid">
+      <div class="contact-info reveal">
+        <span class="eyebrow">Get in touch</span>
+        <h2>Let's start your project.</h2>
+        <p>Tell us what you need and we'll come back with a quote and a team match — usually within a few hours.</p>
+
+        <div class="contact-detail">
+          <div class="dot"></div>
+          <div><h4>Email</h4><p>contact@visualfry.com</p></div>
+        </div>
+        <div class="contact-detail">
+          <div class="dot"></div>
+          <div><h4>Phone</h4><p>+91 991-656-6592</p></div>
+        </div>
+        <div class="contact-detail">
+          <div class="dot"></div>
+          <div><h4>Studio</h4><p>Bangalore – 560091, Karnataka, India</p></div>
+        </div>
+      </div>
+
+      <form class="contact-form reveal" id="contactForm">
+        <div class="form-row">
+          <div class="form-field">
+            <label for="cf-name">Full name</label>
+            <input type="text" id="cf-name" name="name" required placeholder="Your name">
+          </div>
+          <div class="form-field">
+            <label for="cf-email">Email</label>
+            <input type="email" id="cf-email" name="email" required placeholder="you@company.com">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="cf-service">Service</label>
+            <select id="cf-service" name="service">
+              <option>Video Editing</option>
+              <option>Photo Editing</option>
+              <option>Graphic Design</option>
+              <option>Motion Graphics</option>
+              <option>Info Graphics</option>
+              <option>Virtual Staging</option>
+              <option>Matterport 3D</option>
+              <option>Visual Effects</option>
+              <option>Real Estate Video Editing</option>
+              <option>Social Media Video Editing</option>
+              <option>Travel Video Editing</option>
+              <option>Drone Video Solutions</option>
+              <option>Podcast Editing</option>
+              <option>Something else</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="cf-budget">Budget range</label>
+            <select id="cf-budget" name="budget">
+              <option>Under ₹10,000</option>
+              <option>₹10,000 – ₹50,000</option>
+              <option>₹50,000 – ₹1,50,000</option>
+              <option>₹1,50,000+</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="cf-message">Project details</label>
+          <textarea id="cf-message" name="message" required placeholder="Tell us about your footage, timeline, and what you need delivered."></textarea>
+        </div>
+        <button type="submit" class="form-submit">Send project brief</button>
+        <p class="form-note">Sending opens your email client, addressed to contact@visualfry.com.</p>
+      </form>
+    </div>
+  </section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="brand" style="margin-bottom:14px;"><span class="mark"></span> Visualfry Studio</div>
+        <p>Express gateway for design & media outsourcing. Bangalore – 560091, Karnataka, India.</p>
+        <p>Phone: +91 991-656-6592</p>
+        <p>Email: contact@visualfry.com</p>
+      </div>
+      <div>
+        <h4>Studio</h4>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#process">How it works</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <a href="#services">Video Editing</a>
+        <a href="#services">Graphic Design</a>
+        <a href="#services">Virtual Staging</a>
+        <a href="#services">Matterport 3D</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Visualfry Studio. All rights reserved.</span>
+      <span>We visualize. You realize.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  if(navToggle && navLinks){
+    navToggle.addEventListener('click', function(){
+      const isOpen = navLinks.classList.toggle('open');
+      navToggle.textContent = isOpen ? '✕' : '☰';
+      navToggle.setAttribute('aria-expanded', isOpen);
+    });
+    navLinks.querySelectorAll('a').forEach(link=>{
+      link.addEventListener('click', ()=>{
+        navLinks.classList.remove('open');
+        navToggle.textContent = '☰';
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); } });
+  }, {threshold:0.15});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  const contactForm = document.getElementById('contactForm');
+  if(contactForm){
+    contactForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      const name = document.getElementById('cf-name').value;
+      const email = document.getElementById('cf-email').value;
+      const service = document.getElementById('cf-service').value;
+      const budget = document.getElementById('cf-budget').value;
+      const message = document.getElementById('cf-message').value;
+
+      const subject = encodeURIComponent(`Project brief from ${name} — ${service}`);
+      const body = encodeURIComponent(
+        `Name: ${name}\nEmail: ${email}\nService: ${service}\nBudget: ${budget}\n\nProject details:\n${message}`
+      );
+      window.location.href = `mailto:contact@visualfry.com?subject=${subject}&body=${body}`;
+    });
+  }
+  lucide.createIcons();
+</script>
+
+</body>
+</html>
