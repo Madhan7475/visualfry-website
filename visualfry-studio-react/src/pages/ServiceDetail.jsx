@@ -55,9 +55,9 @@ const ServiceDetail = () => {
         </div>
 
         {/* Image Gallery Section */}
-        {service.gallery?.images && service.gallery.images.length > 0 && (
-          <div className="gallery-section reveal" style={{ marginBottom: '60px' }}>
-            <h2 style={{ marginBottom: '30px', fontSize: '2rem', color: 'var(--violet)' }}>Portfolio Gallery</h2>
+        <div className="gallery-section reveal" style={{ marginBottom: '60px' }}>
+          <h2 style={{ marginBottom: '30px', fontSize: '2rem', color: 'var(--violet)' }}>Portfolio Gallery</h2>
+          {service.gallery?.images && service.gallery.images.length > 0 ? (
             <div style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
@@ -78,13 +78,24 @@ const ServiceDetail = () => {
                 />
               ))}
             </div>
-          </div>
-        )}
+          ) : (
+            <div style={{
+              padding: '40px',
+              textAlign: 'center',
+              borderRadius: '16px',
+              border: '1px dashed rgba(255,255,255,0.2)',
+              opacity: 0.5,
+              fontSize: '1.1rem'
+            }}>
+              Portfolio items coming soon...
+            </div>
+          )}
+        </div>
 
         {/* Video Gallery Section */}
-        {service.gallery?.videos && service.gallery.videos.length > 0 && (
-          <div className="video-section reveal" style={{ marginBottom: '60px' }}>
-            <h2 style={{ marginBottom: '30px', fontSize: '2rem', color: 'var(--violet)' }}>Featured Work</h2>
+        <div className="video-section reveal" style={{ marginBottom: '60px' }}>
+          <h2 style={{ marginBottom: '30px', fontSize: '2rem', color: 'var(--violet)' }}>Featured Work</h2>
+          {service.gallery?.videos && service.gallery.videos.length > 0 ? (
             <div style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fill, minmax(450px, 1fr))',
@@ -108,8 +119,19 @@ const ServiceDetail = () => {
                 </div>
               ))}
             </div>
-          </div>
-        )}
+          ) : (
+            <div style={{
+              padding: '40px',
+              textAlign: 'center',
+              borderRadius: '16px',
+              border: '1px dashed rgba(255,255,255,0.2)',
+              opacity: 0.5,
+              fontSize: '1.1rem'
+            }}>
+              Featured videos coming soon...
+            </div>
+          )}
+        </div>
 
         <ContactForm />
       </div>
