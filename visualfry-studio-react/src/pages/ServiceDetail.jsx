@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { SERVICES_DATA, ICON_MAP } from '../data/services';
+import ContactForm from '../components/ContactForm';
 
 const ServiceDetail = () => {
   const { serviceId } = useParams();
@@ -36,7 +37,7 @@ const ServiceDetail = () => {
         </Link>
 
         <div className="service-detail-header reveal" style={{ marginBottom: '40px' }}>
-          {IconComponent && <IconComponent size={48} style={{ color: 'var(--violet', marginBottom: '20px' }} />}
+          {IconComponent && <IconComponent size={48} style={{ color: 'var(--violet)', marginBottom: '20px' }} />}
           <h1 style={{ fontSize: 'clamp(2.5rem, 8vw, 4rem)', lineHeight: '1.1', marginBottom: '20px' }}>{service.title}</h1>
           <p style={{ fontSize: '1.2rem', opacity: 0.8, maxWidth: '600px', lineHeight: '1.6' }}>{service.desc}</p>
         </div>
@@ -110,11 +111,13 @@ const ServiceDetail = () => {
           </div>
         )}
 
-        <div style={{ textAlign: 'center', marginTop: '60px' }}>
+        <div style={{ textAlign: 'center', marginTop: '60px', marginBottom: '80px' }}>
           <Link to="/#contact" className="btn-primary" style={{ textDecoration: 'none', display: 'inline-block' }}>
             Get a Quote for {service.title}
           </Link>
         </div>
+
+        <ContactForm />
       </div>
     </div>
   );
