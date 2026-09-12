@@ -126,14 +126,14 @@
 
   /* ===== Hero ===== */
   .hero{
-    padding:120px 0 100px;
+    padding:60px 0 100px;
     text-align:center;
     position:relative;
   }
   .hero-character{
     display: block;
     margin: 0 auto 30px;
-    width: min(300px, 40vw);
+    width: min(600px, 20vw);
     z-index: 1;
     filter: drop-shadow(0 20px 40px rgba(90,50,160,0.25));
   }
