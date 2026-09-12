@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import { WorkProvider } from './context/WorkContext';
 import Home from './pages/Home';
 import WorkPage from './pages/WorkPage';
+import ServiceDetail from './pages/ServiceDetail';
 import AdminPanel from './pages/AdminPanel';
 import AdminAuth from './pages/AdminAuth';
 import './index.css';
@@ -54,6 +55,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/work" element={<WorkPage />} />
+            <Route path="/services/:serviceId" element={<ServiceDetail />} />
             <Route
               path="/admin"
               element={
