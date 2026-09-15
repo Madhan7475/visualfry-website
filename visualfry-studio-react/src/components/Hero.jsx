@@ -4,11 +4,11 @@ const Hero = () => {
   return (
     <section className="hero">
       <div className="wrap">
-        <img className="hero-character" src="/ganesha.png" alt="Visualfry Studio" />
+        <img className="hero-character" src="/banner.png" alt="Visualfry Studio" />
         <span className="eyebrow">Creative service from Bangalore</span>
-        <h1 className="festive-font"><span className="grad">Happy Ganesh Chaturthi!</span></h1>
+        <h1 className="festive-font"><span className="grad">Crafting Visual Stories That Inspire</span></h1>
         <p className="sub">
-          Visualfry Studio is your creative partner for video production, photography, graphic design, web & app development, and digital marketing—helping brands create, grow, and stand out with impactful creative solutions.
+          Part of the visual world, built for yours.
         </p>
         <div className="cta-row">
           <a href="#contact" className="btn-primary">Get a free quote</a>

@@ -85,20 +85,6 @@ const Work = () => {
           ))}
         </div>
 
-        <div className="portfolio-gallery reveal">
-          <div className="gallery-label">Quick View Gallery</div>
-          <div className="marquee">
-            <div className="marquee-track">
-              {galleryImages.map((img, idx) => (
-                <img key={idx} src={img.url} alt={img.alt} className="gallery-item" />
-              ))}
-              {galleryImages.map((img, idx) => (
-                <img key={`dup-${idx}`} src={img.url} alt={img.alt} className="gallery-item" />
-              ))}
-            </div>
-          </div>
-        </div>
-
         <p className="work-note reveal">More case studies available on request — email contact@visualfry.com for the full portfolio.</p>
       </div>
 

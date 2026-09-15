@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Mail, Phone, MapPin } from 'lucide-react';
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -32,15 +33,15 @@ const ContactForm = () => {
           <p>Tell us what you need and we'll come back with a quote and a team match — usually within a few hours.</p>
 
           <div className="contact-detail">
-            <div className="dot"></div>
+            <div className="dot"><Mail size={18} /></div>
             <div><h4>Email</h4><p>contact@visualfry.com</p></div>
           </div>
           <div className="contact-detail">
-            <div className="dot"></div>
+            <div className="dot"><Phone size={18} /></div>
             <div><h4>Phone</h4><p>+91 991-656-6592</p></div>
           </div>
           <div className="contact-detail">
-            <div className="dot"></div>
+            <div className="dot"><MapPin size={18} /></div>
             <div><h4>Studio</h4><p>Bangalore – 560091, Karnataka, India</p></div>
           </div>
         </div>

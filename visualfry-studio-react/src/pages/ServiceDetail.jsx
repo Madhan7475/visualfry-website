@@ -32,6 +32,21 @@ const ServiceDetail = () => {
   return (
     <div className="page-layout" style={{ padding: '120px 20px 60px' }}>
       <div className="wrap">
+        <div className="service-banner reveal" style={{
+          width: '100%',
+          marginBottom: '60px',
+          borderRadius: '24px',
+          overflow: 'hidden',
+          border: '1px solid var(--border)',
+          boxShadow: '0 20px 40px rgba(0,0,0,0.05)'
+        }}>
+          <img
+            src="/banner.png"
+            alt={service.title}
+            style={{ width: '100%', height: 'auto', display: 'block', aspectRatio: '21/9', objectFit: 'cover' }}
+          />
+        </div>
+
         <Link to="/" style={{ textDecoration: 'none', color: 'var(--violet)', fontSize: '14px', marginBottom: '20px', display: 'block' }}>
           ← Back to Home
         </Link>

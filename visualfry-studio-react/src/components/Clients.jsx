@@ -1,8 +1,12 @@
 import React from 'react';
 
 const CLIENTS = [
-  "Client Name One", "Client Name Two", "Client Name Three",
-  "Client Name Four", "Client Name Five", "Client Name Six"
+  { name: "Client One", logo: "https://placehold.co/200x80?text=Client+One" },
+  { name: "Client Two", logo: "https://placehold.co/200x80?text=Client+Two" },
+  { name: "Client Three", logo: "https://placehold.co/200x80?text=Client+Three" },
+  { name: "Client Four", logo: "https://placehold.co/200x80?text=Client+Four" },
+  { name: "Client Five", logo: "https://placehold.co/200x80?text=Client+Five" },
+  { name: "Client Six", logo: "https://placehold.co/200x80?text=Client+Six" }
 ];
 
 const Clients = () => {
@@ -16,12 +20,12 @@ const Clients = () => {
       </div>
       <div className="marquee reveal" style={{ marginTop: '34px' }}>
         <div className="marquee-track">
-          {CLIENTS.map((name, idx) => (
-            <span key={idx} className="client-logo">{name}</span>
+          {CLIENTS.map((client, idx) => (
+            <img key={idx} src={client.logo} alt={client.name} className="client-logo" />
           ))}
           {/* duplicated for seamless loop */}
-          {CLIENTS.map((name, idx) => (
-            <span key={`dup-${idx}`} className="client-logo" aria-hidden="true">{name}</span>
+          {CLIENTS.map((client, idx) => (
+            <img key={`dup-${idx}`} src={client.logo} alt={client.name} className="client-logo" aria-hidden="true" />
           ))}
         </div>
       </div>

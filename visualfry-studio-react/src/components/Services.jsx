@@ -19,7 +19,7 @@ const Services = () => {
               {cat.services.map((service, sIdx) => {
                 const IconComponent = ICON_MAP[service.icon];
                 return (
-                  <Link to={`/services/${service.id}`} className="service-card" style={{ textDecoration: 'none', color: 'inherit' }}>
+                  <Link key={service.id} to={`/services/${service.id}`} className="service-card" style={{ textDecoration: 'none', color: 'inherit' }}>
                     <span className="num">{service.num}</span>
                     {IconComponent && <IconComponent size={24} style={{ display: 'block', marginBottom: '14px', color: 'var(--violet)' }} />}
                     <h3>{service.title}</h3>

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import GlowField from './components/GlowField';
 import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop';
 import { WorkProvider } from './context/WorkContext';
 import Home from './pages/Home';
 import WorkPage from './pages/WorkPage';
@@ -49,6 +50,7 @@ function App() {
   return (
     <WorkProvider>
       <Router>
+        <ScrollToTop />
         <GlowField />
         <Navbar />
         <main>

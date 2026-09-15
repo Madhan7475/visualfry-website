@@ -1,4 +1,5 @@
 import React from 'react';
+import { Mail, Phone, MapPin } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -9,9 +10,9 @@ const Footer = () => {
             <a href="/" className="brand" style={{ marginBottom: '14px' }}>
               <img src="/logo.png" alt="Visualfry Studio Logo" />
             </a>
-            <p>Express gateway for design & media outsourcing. Bangalore – 560091, Karnataka, India.</p>
-            <p>Phone: +91 991-656-6592</p>
-            <p>Email: contact@visualfry.com</p>
+            <p><MapPin size={14} style={{ marginRight: '8px', verticalAlign: 'middle' }} /> Express gateway for design & media outsourcing. Bangalore – 560091, Karnataka, India.</p>
+            <p><Phone size={14} style={{ marginRight: '8px', verticalAlign: 'middle' }} /> +91 991-656-6592</p>
+            <p><Mail size={14} style={{ marginRight: '8px', verticalAlign: 'middle' }} /> contact@visualfry.com</p>
           </div>
           <div>
             <h4>Studio</h4>
