@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import Navbar from './components/Navbar';
 import GlowField from './components/GlowField';
 import Footer from './components/Footer';
@@ -31,9 +32,10 @@ function App() {
 
     observeElements();
 
-    // Since we have routing, we need to re-observe when the DOM changes
+    let timeoutId;
     const mutationObserver = new MutationObserver(() => {
-      observeElements();
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(observeElements, 200);
     });
 
     mutationObserver.observe(document.body, {
@@ -44,32 +46,35 @@ function App() {
     return () => {
       io.disconnect();
       mutationObserver.disconnect();
+      clearTimeout(timeoutId);
     };
   }, []);
 
   return (
     <WorkProvider>
-      <Router>
-        <ScrollToTop />
-        <GlowField />
-        <Navbar />
-        <main>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/work" element={<WorkPage />} />
-            <Route path="/services/:serviceId" element={<ServiceDetail />} />
-            <Route
-              path="/admin"
-              element={
-                <AdminAuth>
-                  <AdminPanel />
-                </AdminAuth>
-              }
-            />
-          </Routes>
-        </main>
-        <Footer />
-      </Router>
+      <HelmetProvider>
+        <Router>
+          <ScrollToTop />
+          <GlowField />
+          <Navbar />
+          <main>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/work" element={<WorkPage />} />
+              <Route path="/services/:serviceId" element={<ServiceDetail />} />
+              <Route
+                path="/admin"
+                element={
+                  <AdminAuth>
+                    <AdminPanel />
+                  </AdminAuth>
+                }
+              />
+            </Routes>
+          </main>
+          <Footer />
+        </Router>
+      </HelmetProvider>
     </WorkProvider>
   );
 }

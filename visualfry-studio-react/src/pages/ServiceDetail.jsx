@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 import { SERVICES_DATA, ICON_MAP } from '../data/services';
 import ContactForm from '../components/ContactForm';
 
@@ -19,6 +20,7 @@ const ServiceDetail = () => {
   if (!service) {
     return (
       <div style={{ padding: '100px 20px', textAlign: 'center' }}>
+        <SEO title="Service Not Found" description="The requested service page could not be found." />
         <h1>Service Not Found</h1>
         <Link to="/" className="btn-primary" style={{ textDecoration: 'none', display: 'inline-block', marginTop: '20px' }}>
           Return Home
@@ -31,6 +33,12 @@ const ServiceDetail = () => {
 
   return (
     <div className="page-layout" style={{ padding: '120px 20px 60px' }}>
+      <SEO
+        title={service.title}
+        description={service.desc}
+        keywords={`${service.title}, ${service.id.replace(/-/g, ' ')}, Visualfry Studio`}
+        canonicalUrl={`https://visualfry.com/services/${serviceId}`}
+      />
       <div className="wrap">
         <div className="service-banner reveal" style={{
           width: '100%',
@@ -41,7 +49,7 @@ const ServiceDetail = () => {
           boxShadow: '0 20px 40px rgba(0,0,0,0.05)'
         }}>
           <img
-            src="/banner.png"
+            src={service.banner || '/banner.png'}
             alt={service.title}
             style={{ width: '100%', height: 'auto', display: 'block', aspectRatio: '21/9', objectFit: 'cover' }}
           />

@@ -10,7 +10,11 @@ const Navbar = () => {
   return (
     <header>
       <nav className="wrap">
-        <Link to="/" className="brand">
+        <Link
+          to="/"
+          className="brand"
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        >
           <img src="/logo.png" alt="Visualfry Studio Logo" />
         </Link>
         <div className={`nav-links ${isOpen ? 'open' : ''}`} id="navLinks">
