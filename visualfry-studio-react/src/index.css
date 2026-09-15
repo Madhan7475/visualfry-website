@@ -102,7 +102,15 @@
   .nav-links{display:flex; gap:36px; font-size:14.5px; color:var(--text-muted);}
   .nav-links a{transition:color .2s;}
   .nav-links a:hover{color:var(--text);}
-  .nav-right{display:flex; align-items:center; gap:14px;}
+  .nav-right{display:flex; align-items:center; gap:20px;}
+  .nav-whatsapp{
+    font-size:14px;
+    font-weight:500;
+    color:var(--text-muted);
+    transition:color .2s;
+    text-decoration:none;
+  }
+  .nav-whatsapp:hover{color:var(--violet);}
   .nav-cta{
     font-size:14px; font-weight:500; padding:10px 20px; border-radius:100px;
     background:var(--text); color:var(--bg);
@@ -864,5 +872,41 @@
   @media (max-width:860px){
     .portfolio-grid { grid-template-columns: 1fr; }
     .portfolio-card.wide { grid-column: span 1; }
+  }
+
+  .whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 40px;
+    right: 40px;
+    background-color: #25d366;
+    color: #fff;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 3px #999;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+
+  .whatsapp-float:hover {
+    background-color: #128c7e;
+    transform: scale(1.1);
+    color: #fff;
+  }
+
+  .cursor-trail-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: var(--violet);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    will-change: transform;
   }
 

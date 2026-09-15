@@ -25,6 +25,7 @@ const Navbar = () => {
           <a href="/#contact" onClick={closeMenu}>Contact</a>
         </div>
         <div className="nav-right">
+          <a href="https://wa.me/919916566592" className="nav-whatsapp" target="_blank" rel="noopener noreferrer" onClick={closeMenu}>+91 9916566592</a>
           <a href="/#contact" className="nav-cta" onClick={closeMenu}>Start a project</a>
           <button
             className="nav-toggle"

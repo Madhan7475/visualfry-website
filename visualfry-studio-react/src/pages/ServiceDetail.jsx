@@ -36,7 +36,7 @@ const ServiceDetail = () => {
       <SEO
         title={service.title}
         description={service.desc}
-        keywords={`${service.title}, ${service.id.replace(/-/g, ' ')}, Visualfry Studio`}
+        keywords={service.keywords || `${service.title}, ${service.id.replace(/-/g, ' ')}, Visualfry Studio`}
         canonicalUrl={`https://visualfry.com/services/${serviceId}`}
       />
       <div className="wrap">

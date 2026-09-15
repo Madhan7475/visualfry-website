@@ -38,6 +38,7 @@ export const SERVICES_DATA = [
         title: "Web Development",
         desc: "High-performance, scalable websites that turn visitors into loyal customers.",
         icon: "layout",
+        keywords: "professional web development, responsive website design, high performance websites, SEO optimized web design",
         content: "We build modern, responsive websites that blend cutting-edge technology with intuitive user experiences. From enterprise-grade platforms to sleek landing pages, our development process focuses on speed, SEO, and conversion. We use a contemporary tech stack to ensure your site is secure, scalable, and lightning-fast across all devices, providing a seamless journey for your users.",
         gallery: { images: [], videos: [] }
       },
@@ -47,6 +48,7 @@ export const SERVICES_DATA = [
         title: "App Development",
         desc: "Intuitive mobile and web applications built for scale and performance.",
         icon: "laptop",
+        keywords: "cross platform app development, iOS and Android apps, custom mobile application development, scalable app architecture",
         content: "From conceptualization to deployment, we create applications that solve real-world problems. We specialize in cross-platform development, ensuring your app delivers a native-like experience on both iOS and Android. Our focus is on clean architecture, robust APIs, and user-centric design, ensuring your application can grow as your user base expands.",
         gallery: { images: [], videos: [] }
       },
@@ -56,6 +58,7 @@ export const SERVICES_DATA = [
         title: "UI/UX Design",
         desc: "User-first design systems that prioritize clarity, accessibility, and aesthetics.",
         icon: "layers",
+        keywords: "user experience design, UI design services, accessibility focused design, high conversion UX",
         content: "Great software is invisible—it just works. Our UI/UX design process starts with deep user research and wireframing to map out the most efficient user journeys. We then layer on a polished visual skin that aligns with your brand identity. By prioritizing accessibility and intuitive navigation, we reduce friction and increase user satisfaction across every digital touchpoint.",
         gallery: { images: [], videos: [] }
       },
@@ -65,6 +68,7 @@ export const SERVICES_DATA = [
         title: "E-Commerce Development",
         desc: "High-converting online stores designed to maximize sales and customer retention.",
         icon: "shopping-bag",
+        keywords: "shopify development, woo commerce experts, high converting online stores, e-commerce scaling",
         content: "Selling online requires more than just a catalog; it requires a frictionless shopping experience. We build secure, scalable e-commerce platforms that optimize every step of the buyer's journey, from product discovery to checkout. With integrated payment gateways, inventory management, and mobile-first design, we help you scale your digital storefront and increase your average order value.",
         gallery: { images: [], videos: [] }
       },
@@ -80,6 +84,7 @@ export const SERVICES_DATA = [
         banner: "/videoediting.png",
         desc: "The craft that turns raw footage into something that actually moves people.",
         icon: "film",
+        keywords: "cinematic video editing, professional post production, color grading, storytelling video edits",
         content: "Professional video editing is more than just cutting clips; it's about storytelling, pacing, and emotional resonance. At Visualfry Studio, we specialize in cinematic post-production, seamless transitions, and high-impact storytelling. Whether it's a commercial, a brand documentary, or a corporate presentation, we optimize your footage for engagement and conversion. Our process includes advanced color grading, sound design, and rhythmic editing to ensure your message lands perfectly with your target audience.",
         gallery: {
           images: ["/assets/video-editing-1.jpg", "/assets/video-editing-2.jpg"],
@@ -93,6 +98,7 @@ export const SERVICES_DATA = [
         banner: "/motiongraphics.png",
         desc: "Your ideas, animated into graphics with a professional voice behind them.",
         icon: "clapperboard",
+        keywords: "2D 3D animation, explainer videos, logo animation, high end motion design",
         content: "Motion graphics bridge the gap between static design and cinema. We create high-end 2D and 3D animations that simplify complex ideas and make them visually stunning. From explainer videos and logo animations to dynamic social media assets, we bring your brand to life with fluid movement and bold typography. Our motion design services are designed to stop the scroll and leave a lasting impression on your viewers.",
         gallery: { images: [], videos: [] }
       },
@@ -103,6 +109,7 @@ export const SERVICES_DATA = [
         banner: "/visualeffects.png",
         desc: "If you can dream the shot, our team can build it, frame by frame.",
         icon: "sparkles",
+        keywords: "VFX services, CGI integration, seamless compositing, photorealistic visual effects",
         content: "VFX allows you to transcend the limits of reality. We provide a full suite of visual effects services, including seamless compositing, CGI integration, and green-screen removal. Whether you need to create an impossible environment or add subtle cinematic enhancements, our frame-by-frame precision ensures a photorealistic result. We help brands create 'impossible' visuals that capture attention and elevate production value.",
         gallery: { images: [], videos: [] }
       },
@@ -112,6 +119,7 @@ export const SERVICES_DATA = [
         title: "Drone Video Solutions",
         desc: "Sky-high footage, professionally edited and color graded for impact.",
         icon: "plane",
+        keywords: "4K aerial cinematography, professional drone footage, real estate drone video, cinematic aerial shots",
         content: "Elevate your perspective with our professional drone cinematography. We provide stunning 4K aerial footage that adds a sense of scale and grandeur to any project. From sweeping landscapes and urban architecture to event coverage and real estate showcases, our certified pilots capture the perfect angle. Every shot is professionally color-graded to ensure a consistent, cinematic look that emphasizes the beauty and scope of your location.",
         gallery: { images: [], videos: [] }
       },
@@ -126,6 +134,7 @@ export const SERVICES_DATA = [
         title: "Photo Editing",
         desc: "The shutter is only step one — the edit is where the image is really made.",
         icon: "image",
+        keywords: "high end retouching, professional photo editing, product image correction, architectural photo editing",
         content: "Post-processing is where a good photo becomes a great one. We offer expert high-end retouching, advanced color correction, and creative manipulation. Whether it's product photography for e-commerce or architectural shots for a portfolio, we ensure clarity, mood, and perfection. Our editing process removes distractions and enhances lighting to create a polished, professional image that aligns with your brand identity.",
         gallery: { images: [], videos: [] }
       },
@@ -135,6 +144,7 @@ export const SERVICES_DATA = [
         title: "Graphic Design",
         desc: "Design isn't what you see, it's what you make everyone else see.",
         icon: "palette",
+        keywords: "brand identity design, corporate logo design, visual communication, professional graphic design",
         content: "Visual identity is the silent ambassador of your brand. Our graphic design services focus on creating a cohesive and compelling visual language. From iconic logo design and brand guidelines to marketing brochures and digital assets, we blend strategy with creativity. We don't just make things look 'pretty'—we design for communication, ensuring your brand's values are instantly recognizable and professional.",
         gallery: { images: [], videos: [] }
       },
@@ -144,6 +154,7 @@ export const SERVICES_DATA = [
         title: "Info Graphics",
         desc: "Data that reads like a story — because people feel what they can see.",
         icon: "bar-chart-3",
+        keywords: "data visualization, professional infographics, complex data storytelling, custom infographic design",
         content: "In an age of information overload, clarity is power. Our infographic services transform complex data, statistics, and processes into intuitive visual stories. We combine data analysis with graphic design to make information accessible and shareable. Perfect for corporate reports, educational content, and social media, our infographics ensure your audience understands the 'why' and the 'how' of your data at a single glance.",
         gallery: { images: [], videos: [] }
       },
@@ -158,6 +169,7 @@ export const SERVICES_DATA = [
         title: "Search Engine Optimisation",
         desc: "Dominating search results to bring high-intent traffic to your digital doors.",
         icon: "search",
+        keywords: "search engine optimization, organic traffic growth, technical SEO, authority backlinking",
         content: "Visibility is the currency of the web. Our SEO services go beyond keywords—we focus on technical optimization, high-authority backlinking, and content strategy that search engines love. By improving your organic ranking, we ensure that when your potential customers search for a solution, your brand is the first one they find. We provide transparent reporting and continuous optimization to keep you ahead of the competition.",
         gallery: { images: [], videos: [] }
       },
@@ -167,6 +179,7 @@ export const SERVICES_DATA = [
         title: "Bulk WhatsApp Marketing",
         desc: "Direct-to-customer engagement that cuts through the noise with 98% open rates.",
         icon: "send",
+        keywords: "bulk whatsapp marketing, whatsapp automation, direct customer engagement, whatsapp marketing agency",
         content: "WhatsApp is where your customers live. We help you leverage this direct channel for high-conversion marketing campaigns, automated customer support, and personalized outreach. From bulk broadcasting to interactive chatbots, we ensure your communication is non-intrusive yet impactful, driving immediate action and fostering deeper customer relationships.",
         gallery: { images: [], videos: [] }
       },
@@ -176,6 +189,7 @@ export const SERVICES_DATA = [
         title: "Bulk SMS Marketing",
         desc: "Instant, high-reach communication for time-sensitive offers and alerts.",
         icon: "send",
+        keywords: "bulk sms services, high reach sms marketing, promotional sms campaigns, instant customer alerts",
         content: "SMS remains the fastest way to reach an audience. We provide scalable bulk SMS solutions for promotional offers, appointment reminders, and critical updates. Our delivery systems are optimized for high throughput and reliability, ensuring your message reaches the target device instantly, regardless of internet connectivity.",
         gallery: { images: [], videos: [] }
       },
@@ -190,6 +204,7 @@ export const SERVICES_DATA = [
         title: "Hosting & VPS Solutions",
         desc: "Rock-solid stability and speed for your digital assets with Linux & VPS experts.",
         icon: "server",
+        keywords: "linux vps management, secure hosting solutions, server hardening, high uptime vps",
         content: "A beautiful website is useless if it's slow or offline. We provide high-performance hosting and VPS management tailored to your specific traffic needs. From Linux server hardening to automated backups and load balancing, we ensure your infrastructure is a fortress. Our proactive monitoring means we solve bottlenecks before they affect your users, guaranteeing 99.9% uptime.",
         gallery: { images: [], videos: [] }
       },
@@ -199,6 +214,7 @@ export const SERVICES_DATA = [
         title: "Business Email Solutions",
         desc: "Professional communication powered by G Suite, Zoho, and Microsoft 365.",
         icon: "mail",
+        keywords: "professional business email, G Suite setup, Zoho email migration, Microsoft 365 implementation",
         content: "Your email address is your digital handshake. We handle the complex setup and migration of professional business email suites. Whether you prefer the ecosystem of Google Workspace, the flexibility of Zoho, or the corporate power of Microsoft 365, we ensure seamless integration, secure authentication, and zero downtime during the transition.",
         gallery: { images: [], videos: [] }
       },
@@ -213,6 +229,7 @@ export const SERVICES_DATA = [
         title: "Social Media Video Editing",
         desc: "Scroll-stopping edits built to grow followers and engagement.",
         icon: "smartphone",
+        keywords: "tiktok video editing, instagram reels editor, youtube shorts creation, viral video content",
         content: "The digital attention span is shorter than ever. We specialize in 'scroll-stopping' content optimized for TikTok, Instagram Reels, and YouTube Shorts. By using fast-paced editing, dynamic captions, and trending audio, we maximize retention and engagement. We help creators and brands turn raw clips into viral assets that grow followers and drive traffic to their main platforms.",
         gallery: { images: [], videos: [] }
       },
@@ -222,6 +239,7 @@ export const SERVICES_DATA = [
         title: "Travel Video Editing",
         desc: "Your best adventures, cut together with a cinematic touch.",
         icon: "globe",
+        keywords: "cinematic travel films, tourism promo videos, travel vlog editing, atmospheric travel cinematography",
         content: "Travel is about the feeling of a place. We turn raw vacation or promotional travel footage into cinematic journeys. Our focus is on atmosphere, color grading that reflects the locale, and music synchronization that evokes emotion. Whether it's a personal travelogue or a tourism board commercial, we create a visual experience that inspires wanderlust and captures the spirit of adventure.",
         gallery: { images: [], videos: [] }
       },
@@ -231,6 +249,7 @@ export const SERVICES_DATA = [
         title: "Podcast Editing",
         desc: "Clean, noise-free audio so the right words land at the right time.",
         icon: "mic",
+        keywords: "professional podcast post production, audio noise reduction, podcast leveling, clean audio editing",
         content: "Great content can be ruined by poor audio. We provide professional podcast post-production, including noise reduction, filler-word removal, and leveling. We ensure your voice sounds crisp, professional, and consistent. From basic cleanup to full episode structuring and intro/outro integration, we handle the technical side so you can focus on the conversation.",
         gallery: { images: [], videos: [] }
       },
@@ -245,6 +264,7 @@ export const SERVICES_DATA = [
         title: "Real Estate Video Editing",
         desc: "Polished property films built to move listings faster.",
         icon: "home",
+        keywords: "cinematic property tours, real estate video marketing, luxury home films, high conversion real estate video",
         content: "Real estate is about emotion and aspiration. We create cinematic property tours that emphasize flow, luxury, and space. By using strategic cuts and smooth transitions, we guide potential buyers through a property in a way that feels natural and inviting. Our editing focuses on high-conversion hooks and polished finishes, helping agents and developers sell listings faster and for higher values.",
         gallery: { images: [], videos: [] }
       },
@@ -254,6 +274,7 @@ export const SERVICES_DATA = [
         title: "Virtual Staging",
         desc: "Buyers can't picture what isn't there — we furnish empty rooms virtually.",
         icon: "armchair",
+        keywords: "3D virtual staging, photorealistic furniture rendering, empty room staging, real estate visualization",
         content: "Virtual staging is the most cost-effective way to increase the appeal of an empty property. We use high-end 3D rendering to place modern, photorealistic furniture and decor into your property photos. By showing the full potential of a room, we help buyers overcome the 'empty room' hurdle and visualize themselves living in the space, significantly increasing engagement on listing sites.",
         gallery: { images: [], videos: [] }
       },
@@ -263,6 +284,7 @@ export const SERVICES_DATA = [
         title: "Matterport 3D",
         desc: "Turn any property into an interactive, walkable 3D space.",
         icon: "box",
+        keywords: "Matterport 3D tours, digital twin property, immersive real estate viewing, 3D virtual walkthroughs",
         content: "Experience the future of property viewing with Matterport 3D tours. We create a complete, millimeter-accurate digital twin of your space, allowing users to walk through the property from anywhere in the world. This immersive experience builds trust, reduces unnecessary site visits, and provides a comprehensive understanding of the layout. It's the gold standard for high-end real estate and commercial spaces.",
         gallery: { images: [], videos: [] }
       },
