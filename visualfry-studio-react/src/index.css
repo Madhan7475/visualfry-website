@@ -921,3 +921,50 @@
     will-change: transform;
   }
 
+  /* ===== Loading Screen ===== */
+  .loading-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.5s ease, visibility 0.5s;
+  }
+  .loading-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+  .loading-logo {
+    width: 120px;
+    height: auto;
+    animation: pulseLogo 2s ease-in-out infinite;
+  }
+  .loading-bar {
+    width: 160px;
+    height: 3px;
+    background: var(--border);
+    border-radius: 100px;
+    overflow: hidden;
+    position: relative;
+  }
+  .loading-progress {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, var(--ember), var(--violet));
+    animation: loadProgress 2s ease-in-out forwards;
+    width: 0%;
+  }
+
+  @keyframes pulseLogo {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.1); opacity: 1; }
+  }
+  @keyframes loadProgress {
+    0% { width: 0%; }
+    100% { width: 100%; }
+  }
+

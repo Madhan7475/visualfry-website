@@ -7,6 +7,7 @@ import CursorTrail from './components/CursorTrail';
 import GlowField from './components/GlowField';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
+import LoadingScreen from './components/LoadingScreen';
 import { WorkProvider } from './context/WorkContext';
 import Home from './pages/Home';
 import WorkPage from './pages/WorkPage';
@@ -53,33 +54,35 @@ function App() {
   }, []);
 
   return (
-    <WorkProvider>
-      <HelmetProvider>
-        <Router>
-          <ScrollToTop />
-          <GlowField />
-          <Navbar />
-          <WhatsAppFloat />
-          <CursorTrail />
-          <main>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/work" element={<WorkPage />} />
-              <Route path="/services/:serviceId" element={<ServiceDetail />} />
-              <Route
-                path="/admin"
-                element={
-                  <AdminAuth>
-                    <AdminPanel />
-                  </AdminAuth>
-                }
-              />
-            </Routes>
-          </main>
-          <Footer />
-        </Router>
-      </HelmetProvider>
-    </WorkProvider>
+    <LoadingScreen>
+      <WorkProvider>
+        <HelmetProvider>
+          <Router>
+            <ScrollToTop />
+            <GlowField />
+            <Navbar />
+            <WhatsAppFloat />
+            <CursorTrail />
+            <main>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/work" element={<WorkPage />} />
+                <Route path="/services/:serviceId" element={<ServiceDetail />} />
+                <Route
+                  path="/admin"
+                  element={
+                    <AdminAuth>
+                      <AdminPanel />
+                    </AdminAuth>
+                  }
+                />
+              </Routes>
+            </main>
+            <Footer />
+          </Router>
+        </HelmetProvider>
+      </WorkProvider>
+    </LoadingScreen>
   );
 }
 
