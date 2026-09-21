@@ -943,6 +943,10 @@
     height: auto;
     animation: pulseLogo 2s ease-in-out infinite;
   }
+  @keyframes zoomIn {
+    0% { transform: translateZ(-500px) scale(0.5); opacity: 0; }
+    100% { transform: translateZ(0) scale(1); opacity: 1; }
+  }
   .loading-bar {
     width: 160px;
     height: 3px;

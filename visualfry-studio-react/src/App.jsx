@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import Navbar from './components/Navbar';
-import WhatsAppFloat from './components/WhatsAppFloat';
 import CursorTrail from './components/CursorTrail';
 import GlowField from './components/GlowField';
 import Footer from './components/Footer';
@@ -61,7 +60,6 @@ function App() {
             <ScrollToTop />
             <GlowField />
             <Navbar />
-            <WhatsAppFloat />
             <CursorTrail />
             <main>
               <Routes>
