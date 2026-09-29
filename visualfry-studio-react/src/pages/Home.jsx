@@ -5,7 +5,6 @@ import TrustStrip from '../components/TrustStrip';
 import FullWidthVideo from '../components/FullWidthVideo';
 import Services from '../components/Services';
 import Work from '../components/Work';
-import Clients from '../components/Clients';
 import About from '../components/About';
 import Process from '../components/Process';
 import CTA from '../components/CTA';
@@ -54,7 +53,6 @@ const Home = () => {
       <FullWidthVideo />
       <Services />
       <Work />
-      <Clients />
       <About />
       <Process />
       <CTA />

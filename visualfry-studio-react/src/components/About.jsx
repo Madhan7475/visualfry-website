@@ -12,7 +12,7 @@ const About = () => {
           <a href="#contact" className="btn-ghost">Talk to the studio</a>
         </div>
         <div className="about-visual reveal">
-          <img src="/who we are.png" alt="Visualfry Studio Logo" style={{ width: '100%', height: 'auto', display: 'block', margin: '0 auto' }} />
+          <img src="/01-03.png" alt="Visualfry Studio Logo" style={{ width: '100%', height: 'auto', display: 'block', margin: '0 auto' }} />
         </div>
       </div>
     </section>
